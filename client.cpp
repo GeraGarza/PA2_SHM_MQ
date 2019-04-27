@@ -6,6 +6,8 @@
  */
 #include "common.h"
 #include "FIFOreqchannel.h"
+#include "ReqChannel.h"
+#include "SHMReqChannel.hpp"
 #include <fstream>
 #include <time.h>
 #include <sys/time.h>
@@ -21,7 +23,7 @@ struct timeval start;
 struct timeval end_time;
 unsigned long time_in_micros;
 double timeTotal;
-fstream o_time("outtime.csv", std::ofstream::out);
+fstream o_time("received/outtime.csv", std::ofstream::out);
 
 float round_3dec(float var)
 {
@@ -30,7 +32,7 @@ float round_3dec(float var)
 }
 
 
-char* new_Channel(FIFORequestChannel* channel){
+char* new_Channel(RequestChannel* channel){
     
     MESSAGE_TYPE* msg =  new MESSAGE_TYPE(NEWCHANNEL_MSG);
     channel->cwrite((char*)msg,sizeof(MESSAGE_TYPE));
@@ -42,10 +44,10 @@ char* new_Channel(FIFORequestChannel* channel){
 
 
 //datamsg (int _person, double _seconds, int _eno)
-void request_Point(FIFORequestChannel* channel){
+void request_Point(RequestChannel* channel){
     
     
-    fstream ofs("outfile.csv", std::ofstream::out);
+    fstream ofs("received/outfile.csv", std::ofstream::out);
     
     
     float counter = 0.000;
@@ -71,7 +73,7 @@ void request_Point(FIFORequestChannel* channel){
 }
 
 
-void request_File(FIFORequestChannel* channel){
+void request_File(RequestChannel* channel){
     
     FILE *file = fopen ("received/x1.csv", "wb");
     //send message to get length
@@ -117,7 +119,7 @@ void request_File(FIFORequestChannel* channel){
     
 }
 
-void request_Binary(FIFORequestChannel* channel){
+void request_Binary(RequestChannel* channel){
     
     FILE *file = fopen ("received/x1.csv", "wb");
     //send message to get length
@@ -176,8 +178,7 @@ int main(int argc, char *argv[]){
         int n = 100;    // default number of requests per "patient"
         int p = 15;        // number of patients
         srand(time_t(NULL));
-        // *chan = new FIFORequestChannel("control", FIFORequestChannel::CLIENT_SIDE);
-        FIFORequestChannel* chan = new FIFORequestChannel("control", RequestChannel::CLIENT_SIDE,256);
+        SHMRequestChannel* chan = new SHMRequestChannel("control", RequestChannel::CLIENT_SIDE,256);
         //string channel_name = "control";
         gettimeofday(&start, NULL);
         request_Point(chan);

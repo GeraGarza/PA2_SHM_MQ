@@ -31,14 +31,10 @@ KernelSemaphore::KernelSemaphore(string file_name, int bs){ //send value,key'
     sem = sem_open(file_name.c_str(), O_CREAT, 0666, 0);
 
     
- 
 }
 KernelSemaphore::~KernelSemaphore(){
     
     sem_close(sem);
-
-    
-    
 }
 void KernelSemaphore::P(){ //Decrement
 
@@ -53,8 +49,6 @@ void KernelSemaphore::V(){ //Increment
 SHMBoundedBuffer::SHMBoundedBuffer(string file_name, int bs){
     
     this->file_name = file_name;
-    full = new KernelSemaphore(file_name,bs);
-    empty = new KernelSemaphore(file_name, 0);
     
     fd = shm_open((char*)file_name.c_str(), O_RDWR| O_CREAT, 0644);
     ftruncate(fd,bs);
@@ -93,9 +87,8 @@ char* SHMBoundedBuffer::pop(){
 SHMRequestChannel::SHMRequestChannel(const string _name, const Side _side, int bs) :RequestChannel(_name,_side, bs)
 {
     
-    
-    string T1 = "/" + _name + "1";
-    string T2 =  "/" + _name + "2";
+    T1 = "/" + _name + "1";
+    T2 =  "/" + _name + "2";
     
     
     if(my_side==RequestChannel::CLIENT_SIDE){
@@ -114,8 +107,8 @@ SHMRequestChannel::~SHMRequestChannel()
 {
     delete buffer1;
     delete buffer2;
-    remove((create_file_name()+"1").c_str());
-    remove((create_file_name()+"2").c_str());
+    remove((T1).c_str());
+    remove((T2).c_str());
 }
 
 

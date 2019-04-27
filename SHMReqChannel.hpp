@@ -20,6 +20,7 @@ class KernelSemaphore{
     sem_t* sem;
     string file_name;
     int bs;
+
     
 public:
     int value;
@@ -37,6 +38,7 @@ class SHMBoundedBuffer{
     string file_name;
     KernelSemaphore* full;
     KernelSemaphore* empty;
+
 public:
     SHMBoundedBuffer(string, int);
     ~SHMBoundedBuffer();
@@ -55,7 +57,8 @@ private:
     SHMBoundedBuffer* buffer1;
     SHMBoundedBuffer* buffer2;
     string create_file_name();
-    
+    string T1;
+    string T2;
     
     
 public:
