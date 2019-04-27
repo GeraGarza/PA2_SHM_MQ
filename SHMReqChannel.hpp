@@ -36,8 +36,9 @@ class SHMBoundedBuffer{
     int fd ;
     int bs;
     string file_name;
-    KernelSemaphore* full;
-    KernelSemaphore* empty;
+    KernelSemaphore full;
+    KernelSemaphore empty;
+
 
 public:
     SHMBoundedBuffer(string, int);

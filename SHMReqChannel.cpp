@@ -46,11 +46,12 @@ void KernelSemaphore::V(){ //Increment
 
 
 //SHMBoundedBuffer Definitons
-SHMBoundedBuffer::SHMBoundedBuffer(string file_name, int bs){
+SHMBoundedBuffer::SHMBoundedBuffer(string file_name, int bs): full(file_name+"f", 0), empty(file_name+"e",1){
     
     this->file_name = file_name;
     
-    fd = shm_open((char*)file_name.c_str(), O_RDWR| O_CREAT, 0644);
+
+    fd = shm_open(file_name.c_str(), O_RDWR| O_CREAT, 0644);
     ftruncate(fd,bs);
     
     buf = (char*)mmap(NULL,bs, PROT_READ| PROT_WRITE, MAP_SHARED, fd,0);
@@ -65,20 +66,20 @@ SHMBoundedBuffer::~SHMBoundedBuffer(){
     
     close(fd);
     munmap(buf, bs);
-    shm_unlink((char*)file_name.c_str());
+    shm_unlink(file_name.c_str());
     
 }
 void SHMBoundedBuffer::push(string message){
-    empty->P();
+    empty.P();
     memcpy(buf,message.c_str(),bs);
-    full->V();
+    full.V();
 }
 char* SHMBoundedBuffer::pop(){
     
     char* temp_return = new char[bs];
-    full->P();
+    full.P();
     memcpy(temp_return,buf,bs);
-    empty->V();
+    empty.V();
     return temp_return;
 }
 
