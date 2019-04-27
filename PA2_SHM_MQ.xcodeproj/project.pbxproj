@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E0063922272DA7400224A1D /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E00638C2272DA7400224A1D /* common.cpp */; };
-		2E0063932272DA7400224A1D /* dataserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E00638D2272DA7400224A1D /* dataserver.cpp */; };
-		2E0063942272DA7400224A1D /* FIFOreqchannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E00638F2272DA7400224A1D /* FIFOreqchannel.cpp */; };
-		2E0063952272DA7400224A1D /* client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E0063912272DA7400224A1D /* client.cpp */; };
-		2E0063992273000200224A1D /* SHMReqChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E0063972273000200224A1D /* SHMReqChannel.cpp */; };
+		2E18E7082275057B0098926A /* dataserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E18E6FF2275057B0098926A /* dataserver.cpp */; };
+		2E18E7092275057B0098926A /* FIFOreqchannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E18E7022275057B0098926A /* FIFOreqchannel.cpp */; };
+		2E18E70A2275057B0098926A /* client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E18E7042275057B0098926A /* client.cpp */; };
+		2E18E70B2275057B0098926A /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E18E7052275057B0098926A /* common.cpp */; };
+		2E18E70C2275057B0098926A /* SHMReqChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E18E7072275057B0098926A /* SHMReqChannel.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,15 +28,15 @@
 
 /* Begin PBXFileReference section */
 		2E0063822272DA4B00224A1D /* PA2_SHM_MQ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PA2_SHM_MQ; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E00638C2272DA7400224A1D /* common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = common.cpp; sourceTree = "<group>"; };
-		2E00638D2272DA7400224A1D /* dataserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dataserver.cpp; sourceTree = "<group>"; };
-		2E00638E2272DA7400224A1D /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
-		2E00638F2272DA7400224A1D /* FIFOreqchannel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FIFOreqchannel.cpp; sourceTree = "<group>"; };
-		2E0063902272DA7400224A1D /* FIFOreqchannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIFOreqchannel.h; sourceTree = "<group>"; };
-		2E0063912272DA7400224A1D /* client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = client.cpp; sourceTree = "<group>"; };
-		2E0063962272FC9000224A1D /* ReqChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqChannel.h; sourceTree = "<group>"; };
-		2E0063972273000200224A1D /* SHMReqChannel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SHMReqChannel.cpp; sourceTree = "<group>"; };
-		2E0063982273000200224A1D /* SHMReqChannel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SHMReqChannel.hpp; sourceTree = "<group>"; };
+		2E18E6FF2275057B0098926A /* dataserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dataserver.cpp; sourceTree = SOURCE_ROOT; };
+		2E18E7002275057B0098926A /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = SOURCE_ROOT; };
+		2E18E7012275057B0098926A /* ReqChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReqChannel.h; sourceTree = SOURCE_ROOT; };
+		2E18E7022275057B0098926A /* FIFOreqchannel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FIFOreqchannel.cpp; sourceTree = SOURCE_ROOT; };
+		2E18E7032275057B0098926A /* SHMReqChannel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SHMReqChannel.hpp; sourceTree = SOURCE_ROOT; };
+		2E18E7042275057B0098926A /* client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = client.cpp; sourceTree = SOURCE_ROOT; };
+		2E18E7052275057B0098926A /* common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = common.cpp; sourceTree = SOURCE_ROOT; };
+		2E18E7062275057B0098926A /* FIFOreqchannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIFOreqchannel.h; sourceTree = SOURCE_ROOT; };
+		2E18E7072275057B0098926A /* SHMReqChannel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SHMReqChannel.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,15 +69,15 @@
 		2E0063842272DA4B00224A1D /* PA2_SHM_MQ */ = {
 			isa = PBXGroup;
 			children = (
-				2E0063912272DA7400224A1D /* client.cpp */,
-				2E00638C2272DA7400224A1D /* common.cpp */,
-				2E00638E2272DA7400224A1D /* common.h */,
-				2E00638D2272DA7400224A1D /* dataserver.cpp */,
-				2E00638F2272DA7400224A1D /* FIFOreqchannel.cpp */,
-				2E0063902272DA7400224A1D /* FIFOreqchannel.h */,
-				2E0063962272FC9000224A1D /* ReqChannel.h */,
-				2E0063972273000200224A1D /* SHMReqChannel.cpp */,
-				2E0063982273000200224A1D /* SHMReqChannel.hpp */,
+				2E18E7042275057B0098926A /* client.cpp */,
+				2E18E7052275057B0098926A /* common.cpp */,
+				2E18E7002275057B0098926A /* common.h */,
+				2E18E6FF2275057B0098926A /* dataserver.cpp */,
+				2E18E7022275057B0098926A /* FIFOreqchannel.cpp */,
+				2E18E7062275057B0098926A /* FIFOreqchannel.h */,
+				2E18E7012275057B0098926A /* ReqChannel.h */,
+				2E18E7072275057B0098926A /* SHMReqChannel.cpp */,
+				2E18E7032275057B0098926A /* SHMReqChannel.hpp */,
 			);
 			path = PA2_SHM_MQ;
 			sourceTree = "<group>";
@@ -138,11 +138,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E0063942272DA7400224A1D /* FIFOreqchannel.cpp in Sources */,
-				2E0063922272DA7400224A1D /* common.cpp in Sources */,
-				2E0063932272DA7400224A1D /* dataserver.cpp in Sources */,
-				2E0063992273000200224A1D /* SHMReqChannel.cpp in Sources */,
-				2E0063952272DA7400224A1D /* client.cpp in Sources */,
+				2E18E70B2275057B0098926A /* common.cpp in Sources */,
+				2E18E7092275057B0098926A /* FIFOreqchannel.cpp in Sources */,
+				2E18E7082275057B0098926A /* dataserver.cpp in Sources */,
+				2E18E70C2275057B0098926A /* SHMReqChannel.cpp in Sources */,
+				2E18E70A2275057B0098926A /* client.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
