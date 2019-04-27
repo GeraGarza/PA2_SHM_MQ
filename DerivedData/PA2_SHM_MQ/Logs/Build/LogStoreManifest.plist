@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>9</integer>
+	<key>logs</key>
+	<dict>
+		<key>F5783A79-E700-4F57-87EE-99E77577B846</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F5783A79-E700-4F57-87EE-99E77577B846.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>PA2_SHM_MQ project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PA2_SHM_MQ</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PA2_SHM_MQ</string>
+			<key>timeStartedRecording</key>
+			<real>578024971.39275396</real>
+			<key>timeStoppedRecording</key>
+			<real>578024974.116328</real>
+			<key>title</key>
+			<string>Build PA2_SHM_MQ</string>
+			<key>uniqueIdentifier</key>
+			<string>F5783A79-E700-4F57-87EE-99E77577B846</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
