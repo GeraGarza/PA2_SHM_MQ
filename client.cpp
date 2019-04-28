@@ -57,16 +57,15 @@ void request_Point(RequestChannel* channel){
         channel->cwrite((char*)(&msg1),sizeof(datamsg));
         double* response1 = (double*)(channel->cread());
         
-        
-        datamsg msg2(1,counter,2);
-        channel->cwrite((char*)(&msg2),sizeof(datamsg));
-        double* response2 = (double*)(channel->cread());
-        
-        cout << counter << "," <<   *response1 << "," << *response2  << endl;
+
+   
+        cout << counter << "," <<   *response1   << endl;
         gettimeofday(&end_time, NULL);
         timeTotal =  (end_time.tv_sec + end_time.tv_usec)  - (start.tv_sec + start.tv_usec );
         o_time << timeTotal <<endl;
         counter = round_3dec(counter + 0.004);
+        
+        
     }
     ofs.close();
     
@@ -178,12 +177,12 @@ int main(int argc, char *argv[]){
         int n = 100;    // default number of requests per "patient"
         int p = 15;        // number of patients
         srand(time_t(NULL));
-        SHMRequestChannel* chan = new SHMRequestChannel("control", RequestChannel::CLIENT_SIDE,256);
+        RequestChannel* chan = new SHMRequestChannel("control", RequestChannel::CLIENT_SIDE,256);
         //string channel_name = "control";
         gettimeofday(&start, NULL);
         request_Point(chan);
+        
         MESSAGE_TYPE msg =  QUIT_MSG;
-        //  chan->cwrite((char*)msg,sizeof( MESSAGE_TYPE));
         
         
     }

@@ -17,13 +17,12 @@
 //dataserver, except in new, clinet change fifo to req
 
 class KernelSemaphore{
+    public:
     sem_t* sem;
     string file_name;
-    int bs;
 
     
-public:
-    int value;
+
     KernelSemaphore(string,int); //int value, int seed
     ~KernelSemaphore();
     void P();
@@ -32,18 +31,21 @@ public:
 
 
 class SHMBoundedBuffer{
+
+
+public:
     char* buf;
     int fd ;
     int bs;
     string file_name;
-    KernelSemaphore full;
-    KernelSemaphore empty;
+    KernelSemaphore* full;
+    KernelSemaphore* empty;
 
 
-public:
+
     SHMBoundedBuffer(string, int);
     ~SHMBoundedBuffer();
-    void push(string);
+    void push(char*);
     char* pop();
 };
 
@@ -57,7 +59,6 @@ private:
     
     SHMBoundedBuffer* buffer1;
     SHMBoundedBuffer* buffer2;
-    string create_file_name();
     string T1;
     string T2;
     
@@ -77,7 +78,7 @@ public:
     /* Write the data to the channel. The function returns the number of characters written
      to the channel. */
     
-    string name();
+ 
 };
 
 

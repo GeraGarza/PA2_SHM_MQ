@@ -26,32 +26,34 @@ using namespace std;
 
 
 
-KernelSemaphore::KernelSemaphore(string file_name, int bs){ //send value,key'
-    
-    sem = sem_open(file_name.c_str(), O_CREAT, 0666, 0);
-
-    
+KernelSemaphore::KernelSemaphore(string _file_name, int val):file_name(_file_name){ //send value,key'
+    sem = sem_open((char*)file_name.c_str(), O_CREAT, 0666, val);
 }
+
 KernelSemaphore::~KernelSemaphore(){
-    
     sem_close(sem);
+    sem_unlink((char*)file_name.c_str());
 }
-void KernelSemaphore::P(){ //Decrement
 
+void KernelSemaphore::P(){ //Decrement
     sem_wait(sem);
 }
+
 void KernelSemaphore::V(){ //Increment
     sem_post(sem);
 }
 
 
 //SHMBoundedBuffer Definitons
-SHMBoundedBuffer::SHMBoundedBuffer(string file_name, int bs): full(file_name+"f", 0), empty(file_name+"e",1){
+SHMBoundedBuffer::SHMBoundedBuffer(string file_name, int bs): file_name(file_name),bs(bs){
+
+    empty = new KernelSemaphore(file_name + "_e",1);
+    full = new KernelSemaphore(file_name + "_f", 0);
     
-    this->file_name = file_name;
     
 
-    fd = shm_open(file_name.c_str(), O_RDWR| O_CREAT, 0644);
+
+    fd = shm_open((char*)file_name.c_str(), O_RDWR| O_CREAT, 0664);
     ftruncate(fd,bs);
     
     buf = (char*)mmap(NULL,bs, PROT_READ| PROT_WRITE, MAP_SHARED, fd,0);
@@ -66,21 +68,25 @@ SHMBoundedBuffer::~SHMBoundedBuffer(){
     
     close(fd);
     munmap(buf, bs);
-    shm_unlink(file_name.c_str());
+    shm_unlink((char*)file_name.c_str());
     
 }
-void SHMBoundedBuffer::push(string message){
-    empty.P();
-    memcpy(buf,message.c_str(),bs);
-    full.V();
+void SHMBoundedBuffer::push(char* msg){
+    
+    empty->P();
+    memcpy(buf,msg,bs);
+    full->V();
+
 }
 char* SHMBoundedBuffer::pop(){
     
-    char* temp_return = new char[bs];
-    full.P();
-    memcpy(temp_return,buf,bs);
-    empty.V();
-    return temp_return;
+    char* tmp = new char[bs];
+    
+    full->P();
+    memcpy(tmp,buf,bs);
+    empty->V();
+
+    return tmp;
 }
 
 
@@ -88,15 +94,15 @@ char* SHMBoundedBuffer::pop(){
 SHMRequestChannel::SHMRequestChannel(const string _name, const Side _side, int bs) :RequestChannel(_name,_side, bs)
 {
     
-    T1 = "/" + _name + "1";
-    T2 =  "/" + _name + "2";
+    T1 = "/" + _name + "_1";
+    T2 =  "/" + _name + "_2";
     
     
-    if(my_side==RequestChannel::CLIENT_SIDE){
+    if(my_side==RequestChannel::SERVER_SIDE){
         buffer1 = new SHMBoundedBuffer(T1,bs);
         buffer2 = new SHMBoundedBuffer(T2,bs);
     }
-    else if(my_side==RequestChannel::SERVER_SIDE){
+    else if(my_side==RequestChannel::CLIENT_SIDE){
         buffer2 = new SHMBoundedBuffer(T1,bs);
         buffer1 = new SHMBoundedBuffer(T2,bs);
     }
@@ -105,36 +111,21 @@ SHMRequestChannel::SHMRequestChannel(const string _name, const Side _side, int b
 }
 
 SHMRequestChannel::~SHMRequestChannel()
-{
-    delete buffer1;
-    delete buffer2;
-    remove((T1).c_str());
-    remove((T2).c_str());
-}
-
-
+{}
 
 char* SHMRequestChannel::cread(int *len)
 {
     
-    
-    string temp_return;
-    if(len){
-        *len = 229;
-    }
-    
-    return buffer2->pop(); //2 always popping
+   char *buf = new char [bufferSize];
+
+    buf = buffer2->pop();
+    return buf;
 }
 
-
-string SHMRequestChannel::create_file_name(){
-    return "/shm_"+my_name;
-}
 
 
 int SHMRequestChannel::cwrite(char* msg, int len)
 {
-    
     buffer1->push(msg);
     return len;
 }

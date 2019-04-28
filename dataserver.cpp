@@ -144,8 +144,6 @@ void *handle_process_loop(void *_channel)
     for (;;){
         int len = 0;
         char * buffer = channel->cread(&len);
-        if (len == 0)
-            break;
         MESSAGE_TYPE m = *(MESSAGE_TYPE *) buffer;
         if (m == QUIT_MSG)
             break;
@@ -171,8 +169,8 @@ int main(int argc, char *argv[])
         populate_file_data(i+1);
     }
     
-    SHMRequestChannel control_channel("control", RequestChannel::SERVER_SIDE,256);
-    handle_process_loop(&control_channel);
+    RequestChannel* control_channel = new SHMRequestChannel ("control", RequestChannel::SERVER_SIDE,256);
+    handle_process_loop(control_channel);
     
     
     //datamsg (int _person, double _seconds, int _eno)
